@@ -27,6 +27,6 @@
   },
   "include": [
     "src",
-    "src/pages/login.tsx"
+    "src/pages/login/login.tsx"
   ]
 }

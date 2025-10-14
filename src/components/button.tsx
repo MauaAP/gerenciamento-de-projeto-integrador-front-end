@@ -10,7 +10,7 @@ interface ButtonProps {
   onClick?: () => void
 }
 
-function Button({
+export default function Button({
   children,
   disabled = false,
   loading = false,
@@ -33,5 +33,3 @@ function Button({
     </button>
   )
 }
-
-export default Button
