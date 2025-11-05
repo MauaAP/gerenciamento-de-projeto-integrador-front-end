@@ -5,6 +5,13 @@ import PrivateMODRoutes from "./utils/PrivateMODRoutes";
 import PrivateSTUDRoutes from "./utils/PrivateSTUDRoutes";
 import PrivatePROFRoutes from "./utils/PrivatePROFRoutes";
 import ProfessorHome from "./pages/professor/professor_home";
+import type { MenuItems } from "./services/menuItems";
+
+const menuItemsProf: MenuItems[] =[
+    {name: "Meu Perfil", route: "/perfilProf" },
+    {name: "Bancas", route: "/paginaInicialADM"},
+    {name: "Sair", route: "/"}
+];
 
 export default function App() {
     return (
@@ -15,7 +22,7 @@ export default function App() {
                     <Route path="/error" element />
 
                     <Route element={<PrivateADMRoutes />}>
-                        <Route path="/paginaInicialADM" element={<ProfessorHome/>}/>
+                        <Route path="/paginaInicialADM" element={<ProfessorHome menuItems={menuItemsProf}/>}/>
                     </Route>
 
                     <Route element={<PrivateMODRoutes />}>

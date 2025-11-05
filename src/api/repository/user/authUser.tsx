@@ -14,5 +14,5 @@ export async function authUser(data: ILoginForm) {
     localStorage.setItem('token', response.data.token)
 
     // armazenando usuario
-    localStorage.setItem('user', response.data.user)
+    localStorage.setItem('user', JSON.stringify(response.data.user))
 }
