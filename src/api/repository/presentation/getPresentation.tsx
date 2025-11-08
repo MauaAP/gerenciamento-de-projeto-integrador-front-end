@@ -1,0 +1,50 @@
+import axios from "axios";
+import  z  from "zod";
+
+const GetPresentationSchema = z.object({
+    id: z.string({ message: "O id deve ser dado em string" }).length(36, "O id deve conter 36 caracteres").optional(),
+
+    date: z.number({ message: "date deve ser dada em numero" }).optional(),
+
+    groupId: z.string({ message: "groupId deve ser dado em string" }).length(36, "O group id deve conter 36 caracteres").optional(),
+
+    examinationBoardId: z.string({ message: "examinationBoardId deve ser dado em string" }).length(36, "O examinationBoard id deve conter 36 caracteres").optional()
+
+}).refine((data) => {
+    const filterFields = [data.date, data.groupId, data.examinationBoardId];
+
+    const hasFilter = filterFields.some(f => f !== undefined);
+
+    const hasId = data.id !== undefined
+
+    return (hasId && !hasFilter) || (!hasId && hasFilter)
+},
+    {
+        message: "Você deve informar id ou filtros (exatemente um)"
+    }
+)
+
+type GetPresentationSchema = z.infer<typeof GetPresentationSchema>;
+
+export async function getPresentation({ id, date, groupId, examinationBoardId }: GetPresentationSchema) {
+    const querryParams = id ? `id=${id}` : () => {
+        const querryParamsString= [];
+
+        if (date) querryParamsString.push(`date=${date}`);
+        if (groupId) querryParamsString.push(`groupId=${groupId}`);
+        if (examinationBoardId) querryParamsString.push(`examinationBoardId=${examinationBoardId}`);
+
+        return querryParamsString.join('&');
+    }
+
+    const response = await axios.get(
+        `http://localhost:3000/api/presentation?${querryParams}`,
+        {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+    )
+    console.log(response.data);
+    return response.data;
+}

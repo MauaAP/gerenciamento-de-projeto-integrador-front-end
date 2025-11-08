@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { Navigate, Outlet } from "react-router-dom";
-import type { TokenInterface } from "../services/TokenInterface";
+import type { TokenInterface } from "../services/interface/TokenInterface";
 
 export default function PrivateADMRoutes() {
     const token = localStorage.getItem('token');

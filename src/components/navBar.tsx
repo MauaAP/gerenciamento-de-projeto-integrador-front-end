@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { SlideBarContext } from "../contexts/slideBarContext";
 import { SlideBar } from "./slideBar";
 import type { MenuItems } from "../services/menuItems";
-import type { UserInterface } from "../services/UserInterface";
+import type { UserInterface } from "../services/interface/UserInterface";
 
 export default function NavBar({menuItems} : {menuItems: MenuItems[]}) {
     const[userName, setUserName]= useState('');

@@ -6,7 +6,7 @@ import Button from "../../components/button"
 import { jwtDecode } from "jwt-decode"
 import { useNavigate } from "react-router-dom"
 import { ILoginFormSchema, type ILoginForm } from "../../services/loginValidation"
-import type { TokenInterface } from "../../services/TokenInterface";
+import type { TokenInterface } from "../../services/interface/TokenInterface";
 
 export default function Login() {
   const navigate = useNavigate()
