@@ -6,10 +6,17 @@ import PrivateSTUDRoutes from "./utils/PrivateSTUDRoutes";
 import PrivatePROFRoutes from "./utils/PrivatePROFRoutes";
 import ProfessorHome from "./pages/professor/professor_home";
 import type { MenuItems } from "./services/menuItems";
+import StudentHome from "./pages/student/student_home";
 
 const menuItemsProf: MenuItems[] =[
     {name: "Meu Perfil", route: "/perfilProf" },
     {name: "Bancas", route: "/paginaInicialADM"},
+    {name: "Sair", route: "/"}
+];
+
+const menuItemsStud: MenuItems[] =[
+    {name: "Meu Perfil", route: "/perfilStud" },
+    {name: "Bancas", route: "/paginaInicial"},
     {name: "Sair", route: "/"}
 ];
 
@@ -22,7 +29,7 @@ export default function App() {
                     <Route path="/error" element />
 
                     <Route element={<PrivateADMRoutes />}>
-                        <Route path="/paginaInicialADM" element={<ProfessorHome menuItems={menuItemsProf}/>}/>
+                        <Route path="/paginaInicialADM" />
                     </Route>
 
                     <Route element={<PrivateMODRoutes />}>
@@ -30,11 +37,11 @@ export default function App() {
                     </Route>
 
                     <Route element={<PrivatePROFRoutes />}>
-                        <Route path="/paginaInicialProf" />
+                        <Route path="/paginaInicialProf" element={<ProfessorHome menuItems={menuItemsProf}/>}/>
                     </Route>
 
                     <Route element={<PrivateSTUDRoutes />}>
-                        <Route path="/paginaInicial" />
+                        <Route path="/paginaInicial" element={<StudentHome menuItems={menuItemsStud}/>}/>
                     </Route>
 
                 </Routes>
