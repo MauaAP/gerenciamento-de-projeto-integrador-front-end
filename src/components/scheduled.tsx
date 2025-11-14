@@ -27,16 +27,41 @@ export default function Scheduled() {
     return (
         <div className="flex flex-1 justify-center items-center space-x-6">
             <PricipalScheduled presentation={scheduledDisplayContext!.principalPresentation} />
-            <div className="flex flex-col space-y-4 w-100 py-5 items-center justify-center max-h-110">
+            
+            {(scheduledDisplayContext?.carouselPresentations)!.length ? (
+                
+                <div className="flex flex-col space-y-4 w-100 py-5 items-center justify-center max-h-110">
+                    <FaAngleUp className="cursor-pointer text-2xl" onClick={scrollUp} />
+                    
+                    <div ref={scrollRef} className="w-full space-y-3 text-center overflow-y-hidden">
+                        
+                        {scheduledDisplayContext?.carouselPresentations.map((presentation) => (
+                            <SecondaryScheduled key={presentation.id} presentation={presentation}/>
+                        ))}
+                    </div>
+
+                    <FaAngleDown className="cursor-pointer text-2xl" onClick={scrollDown} />
+                </div>
+
+            ) : (
+                null
+            )}
+
+            {/* <div className="flex flex-col space-y-4 w-100 py-5 items-center justify-center max-h-110">
                 <FaAngleUp className="cursor-pointer text-2xl" onClick={scrollUp} />
-                {/* scroll carosel */}
-                <div ref={scrollRef} className="w-full space-y-3 text-center overflow-y-hidden">
-                    {scheduledDisplayContext?.carouselPresentations.map((presentation) => (
+                {/* scroll carosel
+                <div ref={scrollRef} className="w-full space-y-3 text-center overflow-y-hidden" {...() => {
+                    if ((scheduledDisplayContext?.carouselPresentations)!.length > 0) {
+                        return { className: "display-none"}
+                    }
+                }}>
+                    {(scheduledDisplayContext?.carouselPresentations)!.length > 0 ? scheduledDisplayContext?.carouselPresentations.map((presentation) => (
                         <SecondaryScheduled key={presentation.id} presentation={presentation}/>
-                    ))}
+                    )) : null}
                 </div>
                 <FaAngleDown className="cursor-pointer text-2xl" onClick={scrollDown} />
-            </div>
+            </div> */}
+
         </div>
     )
 }

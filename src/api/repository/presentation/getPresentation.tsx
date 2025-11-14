@@ -1,5 +1,6 @@
 import axios from "axios";
 import  z  from "zod";
+import type { PresentationInterface } from "../../../services/interface/PresentationInterface";
 
 const GetPresentationSchema = z.object({
     id: z.string({ message: "O id deve ser dado em string" }).length(36, "O id deve conter 36 caracteres").optional(),
@@ -8,7 +9,9 @@ const GetPresentationSchema = z.object({
 
     groupId: z.string({ message: "groupId deve ser dado em string" }).length(36, "O group id deve conter 36 caracteres").optional(),
 
-    examinationBoardId: z.string({ message: "examinationBoardId deve ser dado em string" }).length(36, "O examinationBoard id deve conter 36 caracteres").optional()
+    examinationBoardId: z.string({ message: "examinationBoardId deve ser dado em string" }).length(36, "O examinationBoard id deve conter 36 caracteres").optional(),
+
+    status: z.enum(["SCHEDULED", "COMPLETED", "REVIEWING"], { message: "status deve ser SCHEDULED, COMPLETED ou REVIEWING" }).optional()
 
 }).refine((data) => {
     const filterFields = [data.date, data.groupId, data.examinationBoardId];
@@ -26,16 +29,17 @@ const GetPresentationSchema = z.object({
 
 type GetPresentationSchema = z.infer<typeof GetPresentationSchema>;
 
-export async function getPresentation({ id, date, groupId, examinationBoardId }: GetPresentationSchema) {
-    const querryParams = id ? `id=${id}` : () => {
+export async function getPresentation({ id, date, groupId, examinationBoardId, status }: GetPresentationSchema): Promise<PresentationInterface[]> {
+    const querryParams = id ? `id=${id}` : (() => {
         const querryParamsString= [];
 
         if (date) querryParamsString.push(`date=${date}`);
         if (groupId) querryParamsString.push(`groupId=${groupId}`);
         if (examinationBoardId) querryParamsString.push(`examinationBoardId=${examinationBoardId}`);
+        if (status) querryParamsString.push(`status=${status}`);
 
         return querryParamsString.join('&');
-    }
+    })();
 
     const response = await axios.get(
         `http://localhost:3000/api/presentation?${querryParams}`,
@@ -46,5 +50,5 @@ export async function getPresentation({ id, date, groupId, examinationBoardId }:
         }
     )
     console.log(response.data);
-    return response.data;
+    return response.data.presentations;
 }

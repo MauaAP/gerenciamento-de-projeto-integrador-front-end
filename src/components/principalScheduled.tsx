@@ -12,7 +12,7 @@ export default function PricipalScheduled({presentation}: {presentation: Present
                     <h3 className="text-l">Projeto Integrador -{presentation.group.codSubj}</h3>
                     <h3>{formattedTimestamp[0]}</h3>
                     <h1 className="text-2xl font-bold">{formattedTimestamp[1]}</h1>
-                    <h3>Sala {presentation.classRoomName}</h3>
+                    <h3>Sala {presentation.classroomName}</h3>
                 </div>
                 <div className="flex text-md text-blue-900/60 mt-3 justify-around flex-col md:flex-row gap-">
                     <div className="w-1/4">

@@ -11,7 +11,7 @@ import UserAccount from "./pages/default/user_account";
 
 const menuItemsProf: MenuItems[] = [
     { name: "Meu Perfil", route: "/perfilProf" },
-    { name: "Apresentações", route: "/paginaInicialADM" },
+    { name: "Apresentações", route: "/paginaInicialProf" },
     { name: "Sair", route: "/" }
 ];
 
@@ -44,6 +44,7 @@ export default function App() {
 
                     <Route element={<PrivateSTUDRoutes />}>
                         <Route path="/paginaInicial" element={<StudentHome menuItems={menuItemsStud} />} />
+                        <Route path="/perfilStud" element={<UserAccount menuItems={menuItemsStud}/>}/>
                     </Route>
 
                 </Routes>

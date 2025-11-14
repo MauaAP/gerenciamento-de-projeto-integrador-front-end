@@ -1,4 +1,4 @@
-import { createContext, useState, type Dispatch, type SetStateAction } from "react";
+import { createContext, useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import type { PresentationInterface } from "../services/interface/PresentationInterface";
 
 // const presentationNotReceived: PresentationInterface= {
@@ -37,9 +37,15 @@ export const ScheduledDisplayContext= createContext<ScheduledDisplayContextProps
 export const ScheduledDisplayContextProvider =({ children, presentationList } : { children: React.ReactNode, presentationList: PresentationInterface[]}) => {
     const presentations = presentationList;
 
-    const [principalPresentation, setPrincipalPresentation]= useState<PresentationInterface>(presentations[0]);
+    const [principalPresentation, setPrincipalPresentation]= useState<PresentationInterface>(presentationList[0]);
 
-    const [carouselPresentations, setCarouselPresentations]= useState<PresentationInterface[]>(presentations.slice(1));
+    const [carouselPresentations, setCarouselPresentations]= useState<PresentationInterface[]>(presentationList.length > 1? presentationList.slice(1) : []);
+
+    useEffect(() => {
+        setPrincipalPresentation(presentationList[0]);
+        setCarouselPresentations(presentationList.length > 1 ? presentationList.slice(1) : []);
+        
+    }, [presentationList]);
 
     return(
         <ScheduledDisplayContext.Provider
