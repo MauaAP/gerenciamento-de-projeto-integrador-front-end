@@ -2,6 +2,7 @@ export interface PresentationInterface {
     id: string;
     date: number;
     classRoomName: string;
+    status: string;
     group: {
         codSubj: string,
         userNameList: string[],
