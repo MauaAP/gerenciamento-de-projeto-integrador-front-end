@@ -2,7 +2,7 @@ export interface PresentationInterface {
     id: string;
     date: number;
     classroomName: string;
-    // status: string;
+    status: string;
     group: {
         codSubj: string,
         userNameList: string[],

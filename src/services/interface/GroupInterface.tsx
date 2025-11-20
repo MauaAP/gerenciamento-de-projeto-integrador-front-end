@@ -8,5 +8,5 @@ export interface GroupInterface{
         partnerName: string,
         extensionHours?: number
     },
-    courseName: string
+    course: string
 }
