@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getAllExaminationBoards() {
     const response = await axios.get(
-        `http://localhost:3000/api/examination-boards`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/examination-boards`,
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

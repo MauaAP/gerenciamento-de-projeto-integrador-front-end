@@ -16,7 +16,7 @@ type UpdateExaminationBoardSchema = z.infer<typeof UpdateExaminationBoardSchema>
 
 export async function updateExaminationBoard({ id, newProfessorIdList }: UpdateExaminationBoardSchema) {
     const response = await axios.put(
-        `http://localhost:3000/api/examination-board`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/examination-board`,
         {
             "id": id,
             "newProfessorIdList": newProfessorIdList,

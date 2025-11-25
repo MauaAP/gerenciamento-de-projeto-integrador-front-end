@@ -9,7 +9,7 @@ type DeleteExaminationBoardSchema = z.infer<typeof DeleteExaminationBoardSchema>
 
 export async function deleteExaminationBoard({id}: DeleteExaminationBoardSchema) {
     const response= await axios.delete(
-        `http://localhost:3000/api/examination-board`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/examination-board`,
         {
             data: {
                 "id": id

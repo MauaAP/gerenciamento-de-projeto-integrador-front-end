@@ -23,7 +23,7 @@ type UpdateUserSchema = z.infer<typeof UpdateUserSchema>;
 
 export async function updateUser({ id, name, email, role, password }: UpdateUserSchema) {
     const response = await axios.put(
-        `http://localhost:3000/api/user`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/user`,
         {
             "id": id,
             ...(name !== undefined && { "name": name }),

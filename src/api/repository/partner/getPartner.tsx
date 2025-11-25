@@ -19,7 +19,7 @@ export async function getPartner({id, name}: GetPartnerSchema) {
     const querryParams = id ? `id=${id}` : `name=${name}`;
 
     const response = await axios.get(
-        `http://localhost:3000/api/partner?${querryParams}`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/partner?${querryParams}`,
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

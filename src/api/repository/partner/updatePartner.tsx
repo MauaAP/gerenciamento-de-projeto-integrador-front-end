@@ -29,7 +29,7 @@ type UpdatePartnerSchema = z.infer<typeof UpdatePartnerSchema>
 
 export async function updatePartner({ id, name, sector }: UpdatePartnerSchema) {
     const response= await axios.put(
-        `http://localhost:3000/api/partner`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/partner`,
         {
             "id": id,
             ...(name !== undefined && { "name": name }),

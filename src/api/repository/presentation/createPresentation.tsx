@@ -15,7 +15,7 @@ type CreatePresentationSchema = z.infer<typeof CreatePresentationSchema>;
 
 export async function createPresentation({ date, groupId, examinationBoardId, classRoomId }: CreatePresentationSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/presentation`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/presentation`,
         {
             "date": date,
             "groupId": groupId,

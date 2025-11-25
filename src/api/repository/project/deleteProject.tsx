@@ -9,7 +9,7 @@ type DeleteProjectSchema = z.infer<typeof DeleteProjectSchema>;
 
 export async function deleteProject({id}: DeleteProjectSchema) {
     const response = await axios.delete(
-        `http://localhost:3000/api/project`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/project`,
         {
             data: {
                 "id": id

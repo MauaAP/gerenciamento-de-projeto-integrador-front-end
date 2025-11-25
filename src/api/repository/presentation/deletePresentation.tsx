@@ -9,7 +9,7 @@ type DeletePresentationSchema = z.infer<typeof DeletePresentationSchema>;
 
 export async function deletePresentation({id}: DeletePresentationSchema) {
     const response = await axios.delete(
-        `http://localhost:3000/api/presentation`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/presentation`,
         {
             data: {
                 "id": id

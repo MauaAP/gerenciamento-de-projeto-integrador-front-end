@@ -9,7 +9,7 @@ type DeleteUserSchema = z.infer<typeof DeleteUserSchema>;
 
 export async function deleteUser({id}: DeleteUserSchema) {
     const response = await axios.delete(
-        `http://localhost:3000/api/user`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/user`,
         {
             data: {
                 "id": id

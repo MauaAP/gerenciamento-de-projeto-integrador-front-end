@@ -14,7 +14,7 @@ type CreateExaminationBoardSchema = z.infer<typeof CreateExaminationBoardSchema>
 
 export async function createExaminationBoard({ professorIdList }: CreateExaminationBoardSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/examination-board`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/examination-board`,
         {
             "professorIdList": professorIdList,
         },

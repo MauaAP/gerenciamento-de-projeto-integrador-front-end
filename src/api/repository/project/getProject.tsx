@@ -19,7 +19,7 @@ export async function getProject({ id, partnerId }: GetProjectSchema) {
     const querryParams = id ? `id=${id}` : `partnerId=${partnerId}`;
 
     const response = await axios.get(
-        `http://localhost:3000/api/project?${querryParams}`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/project?${querryParams}`,
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

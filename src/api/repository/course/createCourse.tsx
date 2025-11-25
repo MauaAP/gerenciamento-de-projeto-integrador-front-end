@@ -9,7 +9,7 @@ type CreateCourseSchema = z.infer<typeof CreateCourseSchema>;
 
 export async function createCourse({ name }: CreateCourseSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/course`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/course`,
         {
             "name": name
         },

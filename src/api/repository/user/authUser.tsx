@@ -4,7 +4,7 @@ import type { ILoginForm } from "../../../services/loginValidation";
 
 export async function authUser(data: ILoginForm) {
     const response = await axios.post(
-        `http://localhost:3000/api/login`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/login`,
         {
             "email": data.email,
             "password": data.password

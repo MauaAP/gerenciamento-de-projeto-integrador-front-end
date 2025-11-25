@@ -22,7 +22,7 @@ type CreateGroupSchema = z.infer<typeof CreateGroupSchema>;
 
 export async function createGroup({ codSubj, userIdList, yearSem, projectId, courseId }: CreateGroupSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/group`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/group`,
         {
             "codSubj": codSubj,
             "userIdList": userIdList,

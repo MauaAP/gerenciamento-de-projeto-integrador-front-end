@@ -14,7 +14,7 @@ const GetPresentationSchema = z.object({
     status: z.enum(["SCHEDULED", "COMPLETED", "REVIEWING"], { message: "status deve ser SCHEDULED, COMPLETED ou REVIEWING" }).optional()
 
 }).refine((data) => {
-    const filterFields = [data.date, data.groupId, data.examinationBoardId];
+    const filterFields = [data.date, data.groupId, data.examinationBoardId, data.status];
 
     const hasFilter = filterFields.some(f => f !== undefined);
 
@@ -42,7 +42,7 @@ export async function getPresentation({ id, date, groupId, examinationBoardId, s
     })();
 
     const response = await axios.get(
-        `http://localhost:3000/api/presentation?${querryParams}`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/presentation?${querryParams}`,
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

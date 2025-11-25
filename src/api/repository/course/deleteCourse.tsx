@@ -10,7 +10,7 @@ type DeleteCourseSchema = z.infer<typeof DeleteCourseSchema>;
 
 export async function deleteCourse({id}: DeleteCourseSchema) {
     const response = await axios.delete(
-        `http://localhost:3000/api/course`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/course`,
         {
             data: {
                 "id": id

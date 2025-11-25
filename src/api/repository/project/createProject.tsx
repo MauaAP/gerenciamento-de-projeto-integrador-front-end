@@ -13,7 +13,7 @@ type ICreateProjectSchema = z.infer<typeof ICreateProjectSchema>;
 
 export async function createProject({ title, partnerId, extensionHours }: ICreateProjectSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/project`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/project`,
         {
             "title": title,
             "partnerId": partnerId,

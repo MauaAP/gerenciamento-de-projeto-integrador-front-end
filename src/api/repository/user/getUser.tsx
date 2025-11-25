@@ -19,7 +19,7 @@ export async function getUser({id, email}: GetUserSchema) {
     const querryParams = id ? `id=${id}` : `email=${email}`;
     
     const response = await axios.get(
-        `http://localhost:3000/api/user?${querryParams}`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/user?${querryParams}`,
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

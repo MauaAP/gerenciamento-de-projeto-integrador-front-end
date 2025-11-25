@@ -19,7 +19,7 @@ type CreatePartnerSchema = z.infer<typeof CreatePartnerSchema>;
 
 export async function createPartner({ name, sector }: CreatePartnerSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/partner`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/partner`,
         {
             "name": name,
             "sector": enumSector(sector)

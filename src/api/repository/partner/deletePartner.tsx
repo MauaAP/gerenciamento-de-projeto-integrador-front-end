@@ -9,7 +9,7 @@ export type DeletePartnerSchema = z.infer<typeof DeletePartnerSchema>
 
 export async function deletePartner({id}: DeletePartnerSchema) {
     const response= await axios.delete(
-        `http://localhost:3000/api/partner`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/partner`,
         {
             data: {
                 "id": id

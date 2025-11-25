@@ -9,7 +9,7 @@ type CreateClassroomSchema = z.infer<typeof CreateClassroomSchema>;
 
 export async function createClassroom({ name }: CreateClassroomSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/classroom`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/classroom`,
         {
             "name": name
         },

@@ -21,7 +21,7 @@ type UpdateProjectSchema = z.infer<typeof UpdateProjectSchema>;
 
 export async function updateProject({ id, title, partnerId, extensionHours }: UpdateProjectSchema) {
     const response = await axios.put(
-        `http://localhost:3000/api/project`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/project`,
         {
             "id": id,
             ...(title !== undefined && { "title": title }),

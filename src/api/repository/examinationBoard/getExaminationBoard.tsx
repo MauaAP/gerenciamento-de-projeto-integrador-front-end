@@ -19,7 +19,7 @@ export async function getExaminationBoard({ id, professorId }: GetExaminationBoa
     const querryParams = id ? `id=${id}` : `professorId=${professorId}`;
 
     const response = await axios.get(
-        `http://localhost:3000/api/examination-board?${querryParams}`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/examination-board?${querryParams}`,
         {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -17,7 +17,7 @@ type ICreateUserSchema = z.infer<typeof ICreateUserSchema>;
 
 export async function createUser({ name, role, email, password }: ICreateUserSchema) {
     const response = await axios.post(
-        `http://localhost:3000/api/user`,
+        `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/user`,
         {
             "name": name,
             "role": enumRole(role),
