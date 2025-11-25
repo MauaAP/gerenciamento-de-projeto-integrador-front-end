@@ -37,44 +37,48 @@ export default function ProfessorHome({ menuItems }: { menuItems: MenuItems[] })
     const [presentations, setPresentations] = useState(defaultPresentations);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+    const fetchPresentations = async () => {
+        try {
+            const data = await getPresentation({status: "SCHEDULED"}); 
 
-        async function fetchPresentations() {
-            try {
-                const data = await getPresentation({status: "SCHEDULED"}); 
-    
-                if (data && data.length > 0) {
-                    setPresentations(data);
-                }
-                else {
-                    setPresentations(defaultPresentations);
-                }
+            if (data && data.length > 0) {
+                setPresentations(data);
             }
-            catch (error) {
-                console.error("Error fetching presentations:", error);
+            else {
                 setPresentations(defaultPresentations);
-            } 
-            finally {
-                setIsLoading(false);
             }
         }
+        catch (error) {
+            console.error("Error fetching presentations:", error);
+            setPresentations(defaultPresentations);
+        } 
+        finally {
+            setIsLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchPresentations();
     }, []); 
     
     return (
         <SlideBarContextProvider>
-            <ScheduledDisplayContextProvider presentationList={ presentations }>
+            <ScheduledDisplayContextProvider presentationList={ presentations } reloadFn={fetchPresentations}>
                 
-                <main className="flex flex-col bg-white w-full h-screen">
+                <main className="flex flex-col bg-gradient-to-br from-gray-50 to-blue-50/30 w-full h-screen overflow-hidden">
                     <NavBar menuItems={menuItems} />
                     {isLoading ? (
                         // Se 'isLoading' for true, mostre esta div de carregamento
                         <div className="flex flex-1 justify-center items-center">
-                            <p className="text-xl text-gray-500">Carregando Apresentações...</p>
+                            <div className="flex flex-col items-center gap-4">
+                                <div className="w-12 h-12 border-4 border-blue-900/60 border-t-transparent rounded-full animate-spin"></div>
+                                <p className="text-xl text-gray-600 font-medium">Carregando Apresentações...</p>
+                            </div>
                         </div>
                     ) : (
-                        <Scheduled/>
+                        <div className="flex-1 overflow-y-auto">
+                            <Scheduled/>
+                        </div>
                     )}
                 </main>
             </ScheduledDisplayContextProvider>
