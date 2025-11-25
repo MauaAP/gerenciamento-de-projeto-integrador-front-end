@@ -1,15 +1,30 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import type { PresentationInterface } from "../services/interface/PresentationInterface";
 import { formatTimestamp } from "./functions/formatTimestamp";
 import { FaCheckCircle, FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaChalkboardTeacher } from "react-icons/fa";
 import { ScheduledDisplayContext } from "../contexts/scheduledDisplayContext";
 import { updatePresentation } from "../api/repository/presentation/updatePresentation";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
+import type { TokenInterface } from "../services/interface/TokenInterface";
 
 export default function PricipalScheduled({presentation}: {presentation: PresentationInterface}){
     const formattedTimestamp= formatTimestamp(presentation.date);
     const scheduledDisplayContext = useContext(ScheduledDisplayContext);
     const [isCompleting, setIsCompleting] = useState(false);
+    const [userRole, setUserRole] = useState<string | null>(null);
+
+    useEffect(() => {
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const tokenData = jwtDecode<TokenInterface>(token);
+                setUserRole(tokenData.role);
+            }
+        } catch (error) {
+            console.error("Erro ao decodificar token:", error);
+        }
+    }, []);
 
     const handleCompletePresentation = async () => {
         if (!scheduledDisplayContext) return;
@@ -147,33 +162,35 @@ export default function PricipalScheduled({presentation}: {presentation: Present
                     )}
                 </div>
 
-                {/* Botão de Concluir Apresentação */}
-                {presentation.status === "COMPLETED" ? (
-                    <button
-                        disabled
-                        className="w-full bg-gradient-to-r from-gray-400 to-gray-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg cursor-not-allowed flex items-center justify-center gap-3 opacity-75"
-                    >
-                        <FaCheckCircle className="text-xl" />
-                        <span className="text-lg">Apresentação Concluída</span>
-                    </button>
-                ) : (
-                    <button
-                        onClick={handleCompletePresentation}
-                        disabled={isCompleting}
-                        className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none disabled:cursor-not-allowed"
-                    >
-                        {isCompleting ? (
-                            <>
-                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                <span className="text-lg">Concluindo...</span>
-                            </>
-                        ) : (
-                            <>
-                                <FaCheckCircle className="text-xl" />
-                                <span className="text-lg">Concluir Apresentação</span>
-                            </>
-                        )}
-                    </button>
+                {/* Botão de Concluir Apresentação - Apenas para não-STUDENT */}
+                {userRole !== "STUDENT" && (
+                    presentation.status === "COMPLETED" ? (
+                        <button
+                            disabled
+                            className="w-full bg-gradient-to-r from-gray-400 to-gray-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg cursor-not-allowed flex items-center justify-center gap-3 opacity-75"
+                        >
+                            <FaCheckCircle className="text-xl" />
+                            <span className="text-lg">Apresentação Concluída</span>
+                        </button>
+                    ) : (
+                        <button
+                            onClick={handleCompletePresentation}
+                            disabled={isCompleting}
+                            className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-[1.02] active:scale-[0.98] disabled:transform-none disabled:cursor-not-allowed"
+                        >
+                            {isCompleting ? (
+                                <>
+                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                    <span className="text-lg">Concluindo...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <FaCheckCircle className="text-xl" />
+                                    <span className="text-lg">Concluir Apresentação</span>
+                                </>
+                            )}
+                        </button>
+                    )
                 )}
             </div>            
         </section>
