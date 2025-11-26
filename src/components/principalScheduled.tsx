@@ -153,7 +153,7 @@ export default function PricipalScheduled({presentation}: {presentation: Present
                 {/* Informações Adicionais */}
                 <div className="flex items-center justify-between text-sm text-gray-600 bg-gray-50 rounded-lg px-4 py-3 border border-gray-200">
                     <div>
-                        <span className="font-semibold">Curso:</span> {presentation.group.courseName}
+                        <span className="font-semibold">Curso:</span> {presentation.group.course}
                     </div>
                     {presentation.group.project.extensionHours && (
                         <div>

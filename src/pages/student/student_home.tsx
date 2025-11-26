@@ -21,7 +21,7 @@ const defaultPresentation: PresentationInterface[] = [
                 partnerName: "Maua",
                 extensionHours: 1
             },
-            courseName: "Nenhum curso"
+            course: "Nenhum curso"
         },
         examinationBoard: {
             professorNameList: ["Nenhum professor"]
