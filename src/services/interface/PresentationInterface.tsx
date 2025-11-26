@@ -12,7 +12,7 @@ export interface PresentationInterface {
             partnerName: string,
             extensionHours?: number
         },
-        courseName: string
+        course: string
     },
     examinationBoard: {
         professorNameList: string[]
