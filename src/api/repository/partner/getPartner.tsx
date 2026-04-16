@@ -13,7 +13,7 @@ const GetPartnerSchema = z.object({
     }
 )
 
-type GetPartnerSchema = z.infer<typeof GetPartnerSchema>
+export type GetPartnerSchema = z.infer<typeof GetPartnerSchema>
 
 export async function getPartner({id, name}: GetPartnerSchema) {
     const querryParams = id ? `id=${id}` : `name=${name}`;

@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export async function getAllExaminationBoards() {
+export type GetAllExaminationBoardsSchema = {
+    id?: string;
+    ProfessorNameList?: string[];
+};
+
+export async function getAllExaminationBoards(): Promise<GetAllExaminationBoardsSchema[]> {
     const response = await axios.get(
         `https://qm7r2xmjbg.us-east-1.awsapprunner.com/api/examination-boards`,
         {
@@ -10,5 +15,5 @@ export async function getAllExaminationBoards() {
         }
     )
     console.log(response.data);
-    return response.data;
+    return response.data.examinationBoards;
 }
