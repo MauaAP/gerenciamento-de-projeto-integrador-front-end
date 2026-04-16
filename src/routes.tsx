@@ -10,6 +10,7 @@ import ProfessorHome from "./pages/professor/professor_home";
 import type { MenuItems } from "./services/menuItems";
 import StudentHome from "./pages/student/student_home";
 import UserAccount from "./pages/default/user_account";
+import AdminCreationHub from "./pages/admin/admin_creation_hub";
 
 const menuItemsProf: MenuItems[] = [
     { name: "Meu Perfil", route: "/perfilProf" },
@@ -23,6 +24,12 @@ const menuItemsStud: MenuItems[] = [
     { name: "Sair", route: "/" }
 ];
 
+const menuItemsAdmin: MenuItems[] = [
+    { name: "Meu Perfil", route: "/perfilAdmin" },
+    { name: "Creation Hub", route: "/paginaInicialADM" },
+    { name: "Sair", route: "/" }
+];
+
 export default function App() {
     return (
         <div>
@@ -32,7 +39,8 @@ export default function App() {
                     <Route path="/error" element />
 
                     <Route element={<PrivateADMRoutes />}>
-                        <Route path="/paginaInicialADM" />
+                        <Route path="/paginaInicialADM" element={<AdminCreationHub menuItems={menuItemsAdmin} />} />
+                        <Route path="/perfilAdmin" element={<UserAccount menuItems={menuItemsAdmin} />} />
                     </Route>
 
                     <Route element={<PrivateMODRoutes />}>
